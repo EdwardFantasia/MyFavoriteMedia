@@ -8,8 +8,14 @@ export class GlobalsInjectable{
     public igdbBearerToken = this._igdbBearerToken.asReadonly();
     private _pfpLink = signal("assets/blank.png")
     public pfpLink = this._pfpLink.asReadonly()
+    private searchablesList = ['game', 'film', 'music', 'user']
+    readonly searchables: Record<string, number> = {}
 
-    GlobalsInjectable(){}
+    constructor(){
+        for(let i = 0; i < this.searchablesList.length; i++){
+            this.searchables[this.searchablesList[i]] = i
+        }
+    }
 
     public setIgdbBearerToken(bearerToken: string){
         this._igdbBearerToken.set(bearerToken)
@@ -19,5 +25,4 @@ export class GlobalsInjectable{
         this._pfpLink.set(link);
     }
 
-    
 }
