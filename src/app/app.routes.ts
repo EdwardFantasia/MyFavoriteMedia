@@ -10,5 +10,5 @@ export const routes: Routes = [
     {path: 'game/:id', component: GamePage},
     {path: 'movie/:id', component: MoviePage},
     {path: 'music/album/:id', component: AlbumPage},
-    {path: 'results/:num/:searchText', component: SearchResultsPage}
+    {path: 'results/:num/:query', component: SearchResultsPage}
 ];

@@ -2,6 +2,7 @@ import { Component, inject, signal } from "@angular/core";
 import { GlobalsInjectable } from "../../injectables/globals_injectable";
 import { Toggle } from "../toggle/toggle";
 import { ToggleReturn } from "../../interfaces/interfaces";
+import { Router } from "@angular/router";
 @Component({
     imports: [Toggle],
     selector: 'Searchbar',
@@ -9,8 +10,8 @@ import { ToggleReturn } from "../../interfaces/interfaces";
         <div>
             <div [style.display] = "showSearch() ? 'block' : 'none'">
                 <div>
-                    <input />
-                    <button (click) = "search()">Search</button>
+                    <input type = "text" #searchInput />
+                    <button (click) = "search(searchInput.value)">Search</button>
                 </div>
                 <Toggle (dataEvent) = "handleToggleChange($event)" [initialState] = "true" id = "game">
                     <p>Search Games</p>
@@ -46,14 +47,17 @@ export class Searchbar{
         "music": true,
         "user": false
     }
+    protected router = inject(Router)
     constructor(){
-        const searchablesKeys = Object.keys(this.globalsInjectable.searchables)
-        for(let i = 0; i < searchablesKeys.length; i++){
-            this.searchBitString += (this.initialStates[searchablesKeys[i]] ? '1' : '0')
+        for(let i = 0; i < this.globalsInjectable.searchablesList.length; i++){
+            this.searchBitString += (this.initialStates[this.globalsInjectable.searchablesList[i]] ? '1' : '0')
         }
     }
-    search(){
-
+    search(query: string){
+        const searchNum = parseInt(this.searchBitString, 2)
+        if(searchNum != 0 && query != ""){
+            this.router.navigate([`results/${searchNum}/${query}`])
+        }
     }
 
     toggleSearch(){

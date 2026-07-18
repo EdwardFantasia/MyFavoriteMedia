@@ -8,7 +8,7 @@ export class GlobalsInjectable{
     public igdbBearerToken = this._igdbBearerToken.asReadonly();
     private _pfpLink = signal("assets/blank.png")
     public pfpLink = this._pfpLink.asReadonly()
-    private searchablesList = ['game', 'film', 'music', 'user']
+    readonly searchablesList = ['game', 'film', 'music', 'user']
     readonly searchables: Record<string, number> = {}
 
     constructor(){
