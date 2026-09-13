@@ -1,16 +1,16 @@
 import { Component, signal, inject, Input, OnInit, OnDestroy, WritableSignal } from '@angular/core';
-import { ActivatedRoute, RouterOutlet } from '@angular/router';
-import { GlobalsInjectable } from '../../injectables/globals_injectable';
+import { ActivatedRoute} from '@angular/router';
+import { GlobalsInjectable, Searchables } from '../../injectables/globals_injectable';
 import { Searchresults } from '../../components/search_results/search_results'
 import { Subscription } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
-  imports: [RouterOutlet, Searchresults],
+  imports: [Searchresults],
   template:`
     <div>
       @for(searchable of displays(); let i = $index; track i){
-        <Searchresults [resultType] = searchable [query] = this.query></Searchresults>
+        <Searchresults class = "searchRes" [id] = searchable [resultType] = searchable [query] = this.query></Searchresults>
       }
     </div>
   `,
@@ -23,7 +23,7 @@ export class SearchResultsPage{
   protected displays= signal<string[]>([])
   constructor(private route: ActivatedRoute){
     this.route.paramMap
-      .pipe(takeUntilDestroyed()) //unsubscribes from event when 
+      .pipe(takeUntilDestroyed()) //unsubscribes from paramMap Observable event when page exited, as keeping subscription after page exit can lead to memory leaks
       .subscribe(params => {
         this.num = params.get("num")
         this.query = params.get("query")
@@ -35,7 +35,7 @@ export class SearchResultsPage{
         let tmpSignals: string[] = []
         for(let i = 0; i < this.globalsInjectable.searchablesList.length; i++){
           let searchable: string = this.globalsInjectable.searchablesList[i]
-          let index: number = this.globalsInjectable.searchables[searchable]
+          let index: number = Searchables[searchable as keyof typeof Searchables]
           if(bitString[index] == "1"){
             tmpSignals.push(searchable)
           }

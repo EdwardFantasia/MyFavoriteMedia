@@ -44,4 +44,6 @@ __screenshots__/
 Thumbs.db
 
 # config
-/tmpconfig.json
+/config.json
+
+/ideas.md

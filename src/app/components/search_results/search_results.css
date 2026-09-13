@@ -1,0 +1,47 @@
+.queryResults{
+    display: flex;
+    width: 100%;
+    overflow-x: hidden;
+    box-sizing: border-box;
+}
+
+.queryResults#game{
+    height: 385px;
+}
+
+.queryResults::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+.queryResults::-webkit-scrollbar-button,
+.queryResults::-webkit-scrollbar-button:single-button,
+.queryResults::-webkit-scrollbar-button:vertical:decrement,
+.queryResults::-webkit-scrollbar-button:vertical:increment,
+.queryResults::-webkit-scrollbar-button:horizontal:decrement,
+.queryResults::-webkit-scrollbar-button:horizontal:increment {
+    display: none;
+    width: 0;
+    height: 0;
+}
+
+.queryResults::-webkit-scrollbar-track {
+    background: white;
+}
+
+.queryResults::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+
+.queryResults::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+.queryResults.hover{
+    overflow-x: auto;
+}
+
+.widget{
+    margin-right: 10px;
+}
