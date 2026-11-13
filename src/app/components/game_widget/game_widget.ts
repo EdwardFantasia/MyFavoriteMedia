@@ -35,6 +35,7 @@ export class Gamewidget implements OnChanges{
 
     navigateToPage(){
         console.log(`navigating to game page ${this.gameWidgetData().id}`)
-        this.router.navigate([`game/${this.gameWidgetData().id}`], {queryParams: {cover: this.cover()}})
+        const pageImg = this.cover()?.replace("t_cover_big", "t_720p")
+        this.router.navigate([`game/${this.gameWidgetData().id}`], {queryParams: {cover: pageImg}})
     }
 }

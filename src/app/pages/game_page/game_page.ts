@@ -5,17 +5,42 @@ import { GameData } from "../../interfaces/interfaces";
 import { ActivatedRoute } from "@angular/router";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 import { Gamewidget } from "../../components/game_widget/game_widget";
+import { Score } from "../../components/score/score";
+import { Searchables } from "../../injectables/globals_injectable";
 @Component({
     //imports: [Gamewidget], TODO: use gamewidget for ports and other categories where singular game ids/arrays of game ids are given
+    imports: [Score],
     selector: 'GamePage',
     template: `
         @if(gameData(); as data){
             <div>
-                <img id = "coverImg" [src] = "this.cover" >
-                <p id = "name">{{ data.name }}</p>
+                <div id = "firstRow">
+                    <div id = "firstRowContainer">
+                    <p id = "name">{{ data.name }}</p>
+                        <div id = "firstRowContainerInner">
+                            <div>
+                                <img id = "coverImg" [src] = "this.cover" >
+                            </div>
+                            <div id = "scoreDivCont">
+                                <div class = "scoreDiv" id = sd-api>
+                                    <Score [score] = "data.total_rating" [rating_count] = "data.total_rating_count" [places] = 2></Score>
+                                    <p class = "ratingText">Based on <span class = "ratingCount">{{data.total_rating_count}}</span> reviews from IGDB</p>
+                                </div>
+                                <div class = "scoreDiv" id = "sd-user">
+                                    <Score [score] = "data.total_rating" [rating_count] = "data.total_rating_count" [places] = 2></Score>
+                                    <p class = "ratingText">Based on <span class = "ratingCount">{{data.total_rating_count}}</span> MyFavoriteMedia user reviews</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id = 'artwork'>
+                
+                </div>
                 <div id = "summaryDiv" [innerHTML] = "data.summary"></div>
                 <p id = "storyline">{{ data.storyline }}</p>
                 <div id = "ports">
+
                 </div>
             </div>
         }
@@ -31,6 +56,7 @@ import { Gamewidget } from "../../components/game_widget/game_widget";
 
 export class GamePage implements OnInit{
     protected globalsInjectable = inject(GlobalsInjectable)
+    readonly searchables = Searchables
     gameId: number = NaN
     gameData = signal<GameData | undefined>(undefined)
     error = signal<boolean>(false)

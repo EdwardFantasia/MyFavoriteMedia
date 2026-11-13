@@ -22,7 +22,9 @@ export interface GameData{
     summary?: string,
     storyline?: string,
     franchise?: number,
-    franchises?: {games: number[], id: number, name: string}
+    franchises?: {games: number[], id: number, name: string},
+    total_rating?: number,
+    total_rating_count?: number
 }
 
 export interface FilmWidgetData{

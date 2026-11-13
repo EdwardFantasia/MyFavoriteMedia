@@ -7,14 +7,15 @@ import { Filmwidget } from "../film_widget/film_widget";
 import { FilmWidgetData, GameData } from "../../interfaces/interfaces";
 import { QueryResult } from "../../interfaces/interfaces";
 import { ToGameWidgetData, ToFilmWidgetData } from "../../pipes/pipes";
+import ShowScroll from "../../directives/scrollable";
 @Component({
     selector: 'Searchresults',
-    imports: [Gamewidget, Filmwidget, ToGameWidgetData, ToFilmWidgetData],
+    imports: [Gamewidget, Filmwidget, ToGameWidgetData, ToFilmWidgetData, ShowScroll],
     template: `
         <div class = "searchResults" [id] = resultType() >
             <p>{{ resultType() }}</p>
             <p> {{resultTypeNum()}} </p>
-            <div (mouseenter)="onMouseEnter($event)" (mouseleave)="onMouseLeave($event)" [class] = "showScroll() ? 'queryResults hover' : 'queryResults'" [id] = resultType() >
+            <div scrollable class = 'queryResults horizontal scrollable' [id] = resultType() >
                 @switch(resultTypeNum()){
                     @case(0){
                         @for(queryResult of queryResults(); let i = $index; track i){
@@ -45,18 +46,6 @@ export class Searchresults implements OnChanges{
 
     constructor(){
 
-    }
-
-    onMouseEnter(event: Event): void{
-        console.log("mouse entered")
-        //console.log("event: ", event)
-        this.showScroll.set(true)
-    }
-
-    onMouseLeave(event: Event): void{
-        console.log("mouse leave")
-        //console.log("event: ", event)
-        this.showScroll.set(false)
     }
 
     async ngOnChanges(){

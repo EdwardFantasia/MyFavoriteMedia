@@ -1,0 +1,45 @@
+.score{
+    width: 170px;
+    height: 170px;
+    animation: 2s ease-in-out forwards;
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr;
+    place-items: center;
+}
+
+.score > * {
+    grid-area: 1/1;
+}
+
+.score svg{
+    width: 170px;
+    height: 170px;
+    transform: rotate(270deg);
+}
+
+.score svg circle{
+    width: 100%;
+    height: 100%;
+    fill: transparent;
+    stroke-width: 28px;
+    stroke: black;
+    transform: translate(5px, 5px);
+}
+
+.score p{
+    font-weight: bold;
+}
+
+.score svg circle:nth-child(2){
+    stroke-dasharray: 440;
+    stroke-dashoffset: 440;
+    /*transition: stroke-dashoffset 0.1s cubic-bezier(0.4, 0, 0, 1.01);*/
+    /*transition: stroke-dashoffset 0.1s cubic-bezier(0.67, 0.02, 0.05, 1.07);*/
+    transition: stroke-dashoffset 0.5s cubic-bezier(0.12, 0.2, 0.2, 1), stroke 0.4s ease;
+}
+
+.score-display{
+    display: flex;
+    justify-content: center;
+}
