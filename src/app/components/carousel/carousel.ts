@@ -7,7 +7,7 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 import { Gamewidget } from "../../components/game_widget/game_widget";
 import { Score } from "../../components/score/score";
 import { Searchables } from "../../injectables/globals_injectable";
-//TODO: Not implemented
+//TODO: Not implemented yet
 @Component({
     imports: [],
     selector: 'Carousel',
