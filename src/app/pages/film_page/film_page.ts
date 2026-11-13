@@ -1,12 +1,12 @@
 import { Component } from "@angular/core";
 @Component({
-    selector: 'GamePage',
+    selector: 'FilmPage',
     template: `
         <div>
         
         </div>
     `,
-    styleUrl: 'movie_page.css'
+    styleUrl: 'film_page.css'
 })
 
-export class MoviePage{}
+export class FilmPage{}
