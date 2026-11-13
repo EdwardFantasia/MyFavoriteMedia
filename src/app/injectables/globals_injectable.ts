@@ -21,7 +21,7 @@ export class GlobalsInjectable{
     }
 
     public setUserProfile(link: string){
-        this._pfpLink.set(link);
+      this._pfpLink.set(link);
     }
 
     private async musicBrainzTestReq(){
